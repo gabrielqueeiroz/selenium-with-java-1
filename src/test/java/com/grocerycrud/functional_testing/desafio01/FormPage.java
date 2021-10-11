@@ -56,11 +56,13 @@ public class FormPage {
     @CacheLookup
     WebElement save_button;
     @FindBy(how = How.CSS, using = "#report-success > p")
-    //*[@id="report-success"]/p
     @CacheLookup
-    WebElement message;
+    WebElement form_message;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"save-and-go-back-button\"]")
+    @CacheLookup
+    WebElement save_and_back_buttton;
 
-    public void fillForm(Map<String, String> person) {
+    public void fillForm01(Map<String, String> person) {
         name.sendKeys(person.get("name"));
         last_name.sendKeys(person.get("last_name"));
         contact_first_name.sendKeys(person.get("contact_first_name"));
@@ -74,7 +76,24 @@ public class FormPage {
         from_employeer.sendKeys(person.get("from_employeer"));
         credit_limit.sendKeys(person.get("credit_limit"));
         save_button.click();
-        Assert.assertEquals(message.getText(), "Your data has been successfully stored into the database. Edit Customer or Go back to list");
+        Assert.assertEquals(form_message.getText(), "Your data has been successfully stored into the database. Edit Customer or Go back to list");
     }
+
+    public void fillForm02(Map<String, String> person) {
+        name.sendKeys(person.get("name"));
+        last_name.sendKeys(person.get("last_name"));
+        contact_first_name.sendKeys(person.get("contact_first_name"));
+        phone.sendKeys(person.get("phone"));
+        addressLine1.sendKeys(person.get("addressLine1"));
+        addressLine2.sendKeys(person.get("addressLine2"));
+        city.sendKeys(person.get("city"));
+        state.sendKeys(person.get("state"));
+        postal_code.sendKeys(person.get("postal_code"));
+        country.sendKeys(person.get("country"));
+        from_employeer.sendKeys(person.get("from_employeer"));
+        credit_limit.sendKeys(person.get("credit_limit"));
+        save_and_back_buttton.click();
+    }
+
 }
 
