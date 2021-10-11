@@ -55,43 +55,26 @@ public class FormPage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"form-button-save\"]")
     @CacheLookup
     WebElement save_button;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"report-success\"]/p")
+    @FindBy(how = How.CSS, using = "#report-success > p")
+    //*[@id="report-success"]/p
     @CacheLookup
     WebElement message;
 
     public void fillForm(Map<String, String> person) {
-        try {
-            Thread.sleep(2000);
-            name.sendKeys(person.get("name"));
-            Thread.sleep(2000);
-            last_name.sendKeys(person.get("last_name"));
-            Thread.sleep(2000);
-            contact_first_name.sendKeys(person.get("contact_first_name"));
-            Thread.sleep(2000);
-            phone.sendKeys(person.get("phone"));
-            Thread.sleep(2000);
-            addressLine1.sendKeys(person.get("addressLine1"));
-            Thread.sleep(2000);
-            addressLine2.sendKeys(person.get("addressLine2"));
-            Thread.sleep(2000);
-            city.sendKeys(person.get("city"));
-            Thread.sleep(2000);
-            state.sendKeys(person.get("state"));
-            Thread.sleep(2000);
-            postal_code.sendKeys(person.get("postal_code"));
-            Thread.sleep(2000);
-            country.sendKeys(person.get("country"));
-            Thread.sleep(2000);
-            from_employeer.sendKeys(person.get("from_employeer"));
-            Thread.sleep(2000);
-            credit_limit.sendKeys(person.get("credit_limit"));
-            Thread.sleep(2000);
-            save_button.click();
-            Thread.sleep(2000);
-            Assert.assertEquals(message.getText(), "Your data has been successfully deleted from the database");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        name.sendKeys(person.get("name"));
+        last_name.sendKeys(person.get("last_name"));
+        contact_first_name.sendKeys(person.get("contact_first_name"));
+        phone.sendKeys(person.get("phone"));
+        addressLine1.sendKeys(person.get("addressLine1"));
+        addressLine2.sendKeys(person.get("addressLine2"));
+        city.sendKeys(person.get("city"));
+        state.sendKeys(person.get("state"));
+        postal_code.sendKeys(person.get("postal_code"));
+        country.sendKeys(person.get("country"));
+        from_employeer.sendKeys(person.get("from_employeer"));
+        credit_limit.sendKeys(person.get("credit_limit"));
+        save_button.click();
+        Assert.assertEquals(message.getText(), "Your data has been successfully stored into the database. Edit Customer or Go back to list");
     }
 }
 
