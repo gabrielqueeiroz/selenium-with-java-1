@@ -1,5 +1,5 @@
 # Prova Técnica DBC
-Este arquivo possui como objetivo apresentar ao público uma automação em página Web realizada utilizando o framework RobotFramework e a biblioteca Selenium na linguagem de programação Python. No decorrer do documento serão dados mais detalhes acerca do processo de teste.
+Este arquivo possui como objetivo apresentar ao público a automação web da página grocerycrud, para isso foi utilizado a linguagem de programação Java, juntamente com o Maven. A biblioteca utilizada foi o Selenium e mais detalhes acerca do processo de teste serão dados no decorrer deste documento.
 
 ## Configurações do sistema
 * Ubuntu 20.04 LTS
@@ -11,6 +11,8 @@ Este arquivo possui como objetivo apresentar ao público uma automação em pág
 * Como instalar
 * Como executar
 * Interpretando o relatório
+* Para o que serve cada classe
+* Bugs Identificados
 
 ## Dependências
 
@@ -50,8 +52,8 @@ sudo snap install intellij-idea-community --classic --edge
 ```
 
 
-### Dependências e plugins
-O Maven é uma plataforma de gestão de bibliotecas utilizada primariamente em projetos Java, a manipulação de bibliotecas e plugins no projeto se dá através de um arquivo denominado `pom.xml`, nele você armazena as dependências que seu projeto utilizará e o maven da automaticamente instala tudo o que você precisa. No escopo deste projeto, foram adicionadas os seguintes plugins e dependências:
+### Dependências
+O Maven é uma plataforma de gestão de bibliotecas utilizada primariamente em projetos Java, a manipulação de bibliotecas e plugins no projeto se dá através de um arquivo denominado `pom.xml`, nele você armazena as dependências que seu projeto utilizará e o maven da automaticamente instala tudo o que você precisa. No escopo deste projeto, foram adicionados uma propriedade responsável por controlar a versão do selenium utilizada no projeto e as seguintes dependências:
 
 Dependências:
 
