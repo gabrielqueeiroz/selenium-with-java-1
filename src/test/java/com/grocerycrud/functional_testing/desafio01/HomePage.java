@@ -1,19 +1,21 @@
 package com.grocerycrud.functional_testing.desafio01;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-
-import java.util.Map;
 
 public class HomePage {
     WebDriver driver;
-
+    WebDriverWait wait;
     public HomePage(WebDriver driver){
         this.driver=driver;
+        this.wait = new WebDriverWait(driver, 5);
     }
 
     @FindBy(how = How.XPATH, using = "/html/body/div[1]/select/option[4]")
@@ -40,19 +42,27 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/span[3]/p")
     @CacheLookup
     WebElement popup_message;
+    @FindBy(how = How.XPATH, using = "/html/body/div[2]/div[2]/div[1]/div[2]/form/div[2]/table/thead/tr[2]/td[2]/div[2]/a")
+    @CacheLookup
+    WebElement update_button;
+
 
 
     public void addCustomer() {
         combo_select.click();
         add_customer_button.click();
     }
+
     public void deleteCustomer(String name){
         search_name.sendKeys(name);
+        update_button.click();
         actions_checkbox.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"gcrud-search-form\"]/div[2]/table/thead/tr[2]/td[2]/div[1]/a")));
         delete_button.click();
-        Assert.assertEquals(delete_message.getText(), "Are you sure that you want to delete those 2 items?");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div/div/div[1]")));
+        Assert.assertEquals(delete_message.getText(), "Are you sure that you want to delete this 1 item?");
         delete_popup_button.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[4]/span[3]/p")));
         Assert.assertEquals(popup_message.getText(), "Your data has been successfully deleted from the database.");
-
     }
 }

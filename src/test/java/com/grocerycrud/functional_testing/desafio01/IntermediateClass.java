@@ -2,8 +2,7 @@ package com.grocerycrud.functional_testing.desafio01;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import java.util.concurrent.TimeUnit;
 
@@ -14,12 +13,13 @@ public class IntermediateClass {
     public void beforeClass(){
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
     }
-//    @AfterSuite
-//    public void afterSuite(){
-//        driver.quit();
-//    }
+    @AfterTest
+    public void afterTest(){
+        driver.quit();
+    }
 
 }

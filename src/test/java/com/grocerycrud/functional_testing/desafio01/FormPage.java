@@ -1,19 +1,24 @@
 package com.grocerycrud.functional_testing.desafio01;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.Map;
 
 public class FormPage {
     WebDriver driver;
+    WebDriverWait wait;
 
-    public FormPage(WebDriver driver) {
+    public FormPage(WebDriver driver){
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 5);
     }
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"field-customerName\"]")
@@ -55,7 +60,7 @@ public class FormPage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"form-button-save\"]")
     @CacheLookup
     WebElement save_button;
-    @FindBy(how = How.CSS, using = "#report-success > p")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"report-success\"]")
     @CacheLookup
     WebElement form_message;
     @FindBy(how = How.XPATH, using = "//*[@id=\"save-and-go-back-button\"]")
@@ -76,6 +81,7 @@ public class FormPage {
         from_employeer.sendKeys(person.get("from_employeer"));
         credit_limit.sendKeys(person.get("credit_limit"));
         save_button.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"report-success\"]")));
         Assert.assertEquals(form_message.getText(), "Your data has been successfully stored into the database. Edit Customer or Go back to list");
     }
 
