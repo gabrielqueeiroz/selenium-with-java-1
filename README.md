@@ -55,8 +55,39 @@ O Maven é uma plataforma de gestão de bibliotecas utilizada primariamente em p
 
 Dependências:
 
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.4.0</version>
+        <scope>test</scope>
+    </dependency>
 
-Plugins:
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-chrome-driver</artifactId>
+        <version>${selenium.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-support</artifactId>
+        <version>${selenium.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium.version}</version>
+    </dependency>
+
+
+Properties:
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <selenium.version>3.141.59</selenium.version>
+    </properties>
 
 ### Webdriver
 Para realizar o teste de um sistema Web através de um navegador é necessário ter instalado o webdriver do navegador a ser utilizado, no caso deste projeto o navegador escolhido foi o Google Chrome. Para realizar a instalação, primeiramente é necessário saber qual a versão atual do seu navegador chrome, que pode ser encontrada seguindo os passos demonstrados nas imagens a seguir:
@@ -66,8 +97,39 @@ Para realizar o teste de um sistema Web através de um navegador é necessário 
 Depois de identificar a versão do chrome, acessar o link https://chromedriver.chromium.org/downloads, selecionar a versão verificada anteriormente nas imagens e baixar o arquivo "chromedriver_linux64.zip". Após concluído o download, abrir o diretório onde o arquivo foi baixado, clicar com o botão direito do mouse e selecionar a opção "Abrir no terminal", estando no terminal digitar o comando ```sudo mv chomedriver /usr/local/bin/```. Tendo feito tudo isso você pode confirmar a instalação do chromedriver através do comando ```chromedriver --version```
 
 ## Como executar
+Para realizar a execução é necessário haver a versão mais recente deste repositório. Dessa forma, você precisa baixar o repositório manualmente ou realizar um git pull através do terminal ou pela IDE utilizada. Para o caso do Intellij IDE, você pode navegar pelos diretórios no caminho: `selenium-web-automation/src/test/java/com.grocerycrud.functional_testing.desafio01` e procurar pela classe denominada "TestCaseClass". Ao chegar nessa classe é possível executar a rotina de testes através do atalho `ctrl+shift+F10` e acompanhar o resultado de cada caso de teste pelo terminal.
+
+## Interpretando o relatório
+Ao realizar a execução dos casos de teste é esperado que o terminal esteja igual a imagem abaixo. Onde o primeiro caso de teste foi executado e ocorreu dentro do esperado e o segundo caso de teste também ocorreu, mas falhou pois a notificação de registro apresentada não está dentro do formato esperado.
+![Screenshot](images/result.png)
+
+## Para o que serve cada classe
+`Data`
+
+Essa classe é responsável por desempenhar o papel de uma base de dados, no contexto atual ela apenas gera um HashMap com os dados utilizados para o preenchimento do formulário.
+
+`FormPage`
+
+Nessa classe foram registrados todos os elementos manipulados na tela do formulário e também possui todos os passos que são realizadas nessa tela.
+
+`HomePage`
+
+Nessa classe foram registrados todos os elementos manipulados na tela inicial e também possui todos os passos que são realizadas nessa tela.
+
+`IntermediateClass`
+
+A classe intermediária é responsável pela configuração em geral, nela foram passados os parâmetros utilizados pelo webdriver para configurar o navegador antes de iniciar a rotina de testes. E também é por onde o navegador se encerra após cada execução de teste.
+
+`TestCaseClass`
+
+Essa é a classe principal, onde todas as outras classes são chamadas e também onde são implementados os casos de teste.
 
 ## Bugs Identificados
+1. **Mensagem informada após registrar usuário diferente do esperado.**
+
+**Resultado encontrado:** Your data has been successfully stored into the database. Edit Record or Go back to list
+
+**Resultado esperado:** Your data has been successfully stored into the database. Edit Customer or Go back to list
 
 
 
